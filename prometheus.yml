@@ -1,0 +1,24 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "node_exporter"
+    static_configs:
+    - targets: ['ip:9100']
+      labels:
+        label: "S1"
+    - targets: ['ip:9100']
+      labels:
+        label: "S2"
+    - targets: ['ip:9100']
+      labels:
+        label: "S3"
+    - targets: ['ip:9100']
+      labels:
+        label: "S4"
+    - targets: ['ip:9100']
+      labels:
+        label: "S5"
+        
+
