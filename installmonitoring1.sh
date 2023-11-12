@@ -129,7 +129,7 @@ printDelimiter
 
 clear
 logo
-printGreen "Виберіть що ви плануєте встановити на ваш сервер:"
+printGreen "Оберіть,що саме ви плануєте встановити на ваш сервер:"
 echo "[1] Node exporter + Prometheus + Grafana"
 echo "[2] Node exporter"
 echo ""
