@@ -133,7 +133,7 @@ printGreen "Виберіть що ви плануєте встановити н�
 echo "[1] Node exporter + Prometheus + Grafana"
 echo "[2] Node exporter"
 echo ""
-read -p "$(printGreen 'Ваш вибір: ')" answer
+read -p "$(echo 'Ваш вибір: ')" answer
 
 if [ "$answer" = "1" ]; then
   full
