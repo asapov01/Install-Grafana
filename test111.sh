@@ -97,9 +97,9 @@ read -p "Введіть IP: " ip
             read -p "Введіть IP: " ip
             read -p "Введіть назву для відображення в Grafana: " label
 
-            echo "  - targets: ['$ip:9100']" >> $HOME/prometheus/prometheus.yml
-            echo "    labels:" >> $HOME/prometheus/prometheus.yml
-            echo "      label: \"$label\"" >> $HOME/prometheus/prometheus.yml;;
+            echo "  - targets: ['$ip:9100']" >> /root/prometheus/prometheus.yml
+            echo "    labels:" >> /root/prometheus/prometheus.yml
+            echo "      label: \"$label\"" >> /root/prometheus/prometheus.yml;;
         [Nn]* ) break;;
         * ) echo "Будь ласка, введіть Y або N.";;
     esac
