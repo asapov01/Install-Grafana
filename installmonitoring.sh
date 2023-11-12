@@ -67,7 +67,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 
-wget https://raw.githubusercontent.com/asapov01/Install-Grafana/main/prometheus.yml -P $HOME/prometheus && \
+wget -O $HOME/prometheus/prometheus.yml https://raw.githubusercontent.com/asapov01/Install-Grafana/main/prometheus.yml && \
 
 sudo systemctl daemon-reload && \
 sudo systemctl enable prometheusd && \
