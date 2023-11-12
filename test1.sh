@@ -91,19 +91,20 @@ read -p "Введіть IP: " ip
     echo "        label: \"$label\"" >> prometheus.yml
 
     while true; do
-        read -p "Бажаєте додати ще сервер для моніторингу? [Y/N]: " yn
-        case $yn in
-            [Yy]* )
-                read -p "Введіть IP: " ip
-                read -p "Введіть назву для відображення в Grafana: " label
+    read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
+    case $yn in
+        [Yy]* )
+            read -p "Введіть IP: " ip
+            read -p "Введіть назву для відображення в Grafana: " label
 
-                echo "    - targets: ['$ip:9100']" >> prometheus.yml
-                echo "      labels:" >> prometheus.yml
-                echo "        label: \"$label\"" >> prometheus.yml;;
-            [Nn]* ) break;;
-            * ) echo "Будь ласка, введіть Y або N.";;
-        esac
-    done
+            echo "  - targets: ['$ip:9100']" >> prometheus.yml
+            echo "    labels:" >> prometheus.yml
+            echo "      label: \"$label\"" >> prometheus.yml;;
+        [Nn]* ) break;;
+        * ) echo "Будь ласка, введіть Y або N.";;
+    esac
+done
+sudo systemctl restart prometheusd
 printGreen "Тепер перейдіть до гайду, та створіть дашборд в Grafana"
 }
 
