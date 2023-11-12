@@ -3,6 +3,3 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-
-        
-
