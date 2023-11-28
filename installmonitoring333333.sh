@@ -54,9 +54,14 @@ EOF
     read -p "Введіть IP: " ip
     read -p "Введіть назву для відображення в Grafana: " label
 
-    echo "  - targets: ['$ip:9100']" >> $HOME/prometheus/prometheus.yml
-    echo "    labels:" >> $HOME/prometheus/prometheus.yml
-    echo "      label: \"$label\"" >> $HOME/prometheus/prometheus.yml
+    cat << EOF >> $HOME/prometheus/prometheus.yml
+scrape_configs:
+  - job_name: "node_exporter"
+    static_configs:
+    - targets: ['$ip:9100']
+      labels:
+        label: "$label"
+EOF
 
     while true; do
         read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
@@ -65,9 +70,11 @@ EOF
                 read -p "Введіть IP: " ip
                 read -p "Введіть назву для відображення в Grafana: " label
 
-                echo "  - targets: ['$ip:9100']" >> $HOME/prometheus/prometheus.yml
-                echo "    labels:" >> $HOME/prometheus/prometheus.yml
-                echo "      label: \"$label\"" >> $HOME/prometheus/prometheus.yml
+                cat << EOF >> $HOME/prometheus/prometheus.yml
+    - targets: ['$ip:9100']
+      labels:
+        label: "$label"
+EOF
                 ;;
             [Nn]* ) break;;
             * ) echo "Будь ласка, введіть Y або N.";;
