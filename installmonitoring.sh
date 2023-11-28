@@ -127,13 +127,14 @@ function node_exporter() {
     mv $HOME/node_exporter/node_exporter /usr/bin && \
     rm -Rvf $HOME/node_exporter/
 
-    sudo tee /etc/systemd/system/exporterd.service > /dev/null <<EOF
+    sudo tee /etc/systemd/system/prometheusd.service > /dev/null <<EOF
 [Unit]
-Description=node_exporter
+Description=prometheus
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=/usr/bin/node_exporter
+ExecStart=$HOME/prometheus/prometheus --config.file="$HOME/prometheus/prometheus.yml" --web.listen-address=":9095"
+--config.file="$HOME/prometheus/prometheus.yml"
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
