@@ -32,7 +32,7 @@ Description=node_exporter
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=/usr/bin/node_exporter
+ExecStart=/usr/bin/node_exporter --web.listen-address=":9095
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
