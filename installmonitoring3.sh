@@ -108,7 +108,7 @@ EOF
 
     sudo systemctl daemon-reload && \
     sudo systemctl enable grafana-server && \
-    rm -rf /root/grafana_8.0.6_amd64.deb/
+    rm -rf $HOME/grafana_8.0.6_amd64.deb && \
     echo ""
     printGreen "Встановлено Node-Exporter, Prometheus, Grafana"
     printGreen "Тепер перейдіть до гайду, та створіть дашборд в Grafana"
