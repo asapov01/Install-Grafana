@@ -153,4 +153,4 @@ read -p "$(echo 'Ваш вибір: ')" answer
 if [ "$answer" = "1" ]; then
     full
 elif [ "$answer" = "2" ]; then
-    node_exporter
+    node_exporter 
