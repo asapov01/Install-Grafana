@@ -14,7 +14,7 @@ function printDelimiter {
 
 function full() {
     printGreen "Оновлюємо сервер"
-    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget
+    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget && sudo ufw allow 9100/tcp && sudo ufw allow 9095/tcp
 
     printGreen "Встановлення node-exporter"
     cd $HOME && \
@@ -117,7 +117,7 @@ EOF
 
 function node_exporter() {
     printGreen "Встановлюємо Node Exporter"
-    sudo apt-get update && sudo apt-get upgrade -y
+    sudo apt-get update && sudo apt-get upgrade -y && sudo ufw allow 9100/tcp && sudo ufw allow 9095/tcp
     cd $HOME && \
     wget https://github.com/prometheus/node_exporter/releases/download/v1.2.0/node_exporter-1.2.0.linux-amd64.tar.gz && \
     tar xvf node_exporter-1.2.0.linux-amd64.tar.gz && \
