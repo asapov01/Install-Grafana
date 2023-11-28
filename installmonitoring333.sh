@@ -68,10 +68,12 @@ EOF
                 echo "  - targets: ['$ip:9100']" >> $HOME/prometheus/prometheus.yml
                 echo "    labels:" >> $HOME/prometheus/prometheus.yml
                 echo "      label: \"$label\"" >> $HOME/prometheus/prometheus.yml
+                ;;
             [Nn]* ) break;;
             * ) echo "Будь ласка, введіть Y або N.";;
         esac
     done
+
     sudo systemctl restart prometheusd
     chmod +x $HOME/prometheus/prometheus
     sudo tee /etc/systemd/system/prometheusd.service > /dev/null <<EOF
@@ -103,7 +105,6 @@ EOF
     printGreen "Встановлено Node-Exporter, Prometheus, Grafana"
     printGreen "Тепер перейдіть до гайду, та створіть дашборд в Grafana"
     echo ""
-    
 }
 
 function node_exporter() {
