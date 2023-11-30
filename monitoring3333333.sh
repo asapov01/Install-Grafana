@@ -14,23 +14,20 @@ function printDelimiter {
 
 function addip() {
     while true; do
-    read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
-    case $yn in
-        [Yy]* )
-            read -p "Введіть IP: " ip
-            read -p "Введіть назву для відображення в Grafana: " label
+        read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
+        case $yn in
+            [Yy]* )
+                read -p "Введіть IP: " ip
+                read -p "Введіть назву для відображення в Grafana: " label
 
-            cat << EOF >> $HOME/prometheus/prometheus.yml
-- targets: ['$ip:9100']
-  labels:
-    label: "$label"
-EOF
-            ;;
-        [Nn]* ) break;;
-        * ) echo "Будь ласка, введіть Y або N.";;
-    esac
-done
+                printf "  - targets: ['$ip:9100']\n    labels:\n      label: \"$label\"\n" >> $HOME/prometheus/prometheus.yml
+                ;;
+            [Nn]* ) break;;
+            * ) echo "Будь ласка, введіть Y або N.";;
+        esac
+    done
 }
+
 function full() {
     printGreen "Оновлюємо сервер"
     sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget && sudo ufw allow 9100/tcp && sudo ufw allow 9095/tcp
