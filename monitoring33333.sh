@@ -116,7 +116,7 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF
-
+    sudo sed -i '/^ExecStart=/ s/$/ --web.listen-address=":9999"/' /etc/systemd/system/prometheusd.service
     sudo systemctl daemon-reload && \
     sudo systemctl enable prometheusd && \
 
