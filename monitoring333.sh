@@ -12,6 +12,25 @@ function printDelimiter {
     echo "==========================================="
 }
 
+function addip() {
+    while true; do
+    read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
+    case $yn in
+        [Yy]* )
+            read -p "Введіть IP: " ip
+            read -p "Введіть назву для відображення в Grafana: " label
+
+            cat << EOF >> $HOME/prometheus/prometheus.yml
+- targets: ['$ip:9100']
+  labels:
+    label: "$label"
+EOF
+            ;;
+        [Nn]* ) break;;
+        * ) echo "Будь ласка, введіть Y або N.";;
+    esac
+done
+}
 function full() {
     printGreen "Оновлюємо сервер"
     sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget && sudo ufw allow 9100/tcp && sudo ufw allow 9095/tcp
@@ -32,7 +51,7 @@ Description=node_exporter
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=/usr/bin/node_exporter --web.listen-address=":9095
+ExecStart=/usr/bin/node_exporter
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -63,7 +82,23 @@ scrape_configs:
         label: "$label"
 EOF
 
-    additional_servers
+    while true; do
+        read -p "Бажаєте додати для моніторингу ще сервер? [Y/N]: " yn
+        case $yn in
+            [Yy]* )
+                read -p "Введіть IP: " ip
+                read -p "Введіть назву для відображення в Grafana: " label
+
+                cat << EOF >> $HOME/prometheus/prometheus.yml
+    - targets: ['$ip:9100']
+      labels:
+        label: "$label"
+EOF
+                ;;
+            [Nn]* ) break;;
+            * ) echo "Будь ласка, введіть Y або N.";;
+        esac
+    done
 
     sudo systemctl restart prometheusd
     chmod +x $HOME/prometheus/prometheus
@@ -136,44 +171,19 @@ EOF
     printDelimiter
 }
 
-function additional_servers() {
-    printGreen "Додавання IP серверів до моніторингу"
-    while true; do
-        read -p "Введіть IP: " ip
-        read -p "Введіть назву для відображення в Grafana: " label
-
-        cat << EOF >> $HOME/prometheus/prometheus.yml
-    - targets: ['$ip:9100']
-      labels:
-        label: "$label"
-EOF
-
-        read -p "Бажаєте додати інший сервер? [Y/N]: " yn
-        case $yn in
-            [Nn]* ) break;;
-            * ) echo "Будь ласка, введіть Y або N.";;
-        esac
-    done
-
-    sudo systemctl restart prometheusd
-    echo ""
-    printGreen "IP серверів успішно додано до моніторингу!"
-    echo ""
-}
-
 clear
 logo
 printGreen "Оберіть, що саме ви плануєте встановити на ваш сервер:"
 echo "[1] Node exporter + Prometheus + Grafana"
 echo "[2] Node exporter"
-echo "[3] Додати IP серверів до моніторингу"
+echo "[3] Додати ще сервери для моніторингу
 echo ""
 read -p "$(echo 'Ваш вибір: ')" answer
 
 if [ "$answer" = "1" ]; then
     full
 elif [ "$answer" = "2" ]; then
-    node_exporter
+    node_exporter 
 elif [ "$answer" = "3" ]; then
-    additional_servers
+    addip
 fi
