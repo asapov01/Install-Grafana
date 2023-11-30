@@ -20,18 +20,14 @@ function addip() {
                 read -p "Введіть IP: " ip
                 read -p "Введіть назву для відображення в Grafana: " label
 
-                sed -i '/- targets:/ {
-                    n
-                    i\    - targets: ['\''$ip:9100'\'']
-                    i\      labels:
-                    i\        label: "'$label'"
-                }' $HOME/prometheus/prometheus.yml
+                sed -i '/- targets: .*/a \    - targets: ['\''$ip:9100'\'']\n      labels:\n        label: "'$label'"' $HOME/prometheus/prometheus.yml
                 ;;
             [Nn]* ) break;;
             * ) echo "Будь ласка, введіть Y або N.";;
         esac
     done
 }
+
 
 
 
