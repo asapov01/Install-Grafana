@@ -176,7 +176,7 @@ logo
 printGreen "Оберіть, що саме ви плануєте встановити на ваш сервер:"
 echo "[1] Node exporter + Prometheus + Grafana"
 echo "[2] Node exporter"
-echo "[3] Додати ще сервери для моніторингу
+echo "[3] Додати ще сервери для моніторингу"
 echo ""
 read -p "$(echo 'Ваш вибір: ')" answer
 
