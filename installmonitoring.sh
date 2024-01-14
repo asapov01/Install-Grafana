@@ -32,9 +32,6 @@ EOF
     done
 }
 
-
-
-
 function full() {
     printGreen "Оновлюємо сервер"
     sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget && sudo ufw allow 9100/tcp && sudo ufw allow 9095/tcp
