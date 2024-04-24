@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
+
 spinner() {
   local pid=$1
   local delay=0.1
@@ -18,7 +19,7 @@ clear
 printLogo
 
 echo ""
-spinner
+spinner $$ & # Используем $$ для получения PID текущего скрипта
 printColor blue "Please enter the node moniker:"
 read -r NODE_MONIKER
 
