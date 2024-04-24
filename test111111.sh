@@ -20,7 +20,7 @@ printLogo() {
     IFS=$'\n'
     for line in $logo; do
         echo "$line"
-        sleep 0.06
+        sleep 0.067
     done
 }
 
