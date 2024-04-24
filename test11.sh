@@ -4,8 +4,6 @@
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
-#!/bin/bash
-
 printLogo() {
     logo="
 
@@ -18,16 +16,17 @@ printLogo() {
 
 "
 
-    # Выводим логотип с задержкой 0.03 секунды между строками
+    # Выводим логотип с задержкой 0.05 секунды между строками
     IFS=$'\n'
     for line in $logo; do
         echo "$line"
-        sleep 0.03
+        sleep 0.05
     done
 }
 
 printLogo
 echo "_______________________________________________________________________________________"
+
 
 
 echo ""
