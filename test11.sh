@@ -3,13 +3,14 @@
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 spinner() {
-  local pid=$1
   local delay=0.1
-  local spinstr='|/-\'
-  while ps -p "$pid" > /dev/null; do
-    local temp=${spinstr#?}
-    printf "################${spinstr:0:1}${temp}===100%%\r"
-    local spinstr=${temp}${spinstr:0:1}
+  local progress=0
+  local width=20 # Ширина прогресс-бара
+  local total_iterations=30 # Всего итераций (время анимации = total_iterations * delay)
+
+  for ((i = 0; i < total_iterations; i++)); do
+    printf "Progress: %3d%% [%-${width}s] %d%%\r" "$progress" "$(printf "%0.s#" $(seq 1 $((progress*width/100))))" "$progress"
+    ((progress += 100 / total_iterations)) # Увеличиваем прогресс на 100 / total_iterations %
     sleep "$delay"
   done
   printf "\n"
@@ -19,7 +20,8 @@ clear
 printLogo
 
 echo ""
-spinner $$ & # Используем $$ для получения PID текущего скрипта
+(spinner) & # Запускаем анимацию в фоновом режиме
+
 printColor blue "Please enter the node moniker:"
 read -r NODE_MONIKER
 
