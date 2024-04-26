@@ -13,7 +13,10 @@ PORT_RPC=$6
 
 logo
 
-echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
+echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printAddition "$BLOCK")" && sleep 1
+echo -e "\n$(printBlue "If you want to detach from the Tmux session, use the key combination: $(printYellow CTRL + b), then release both keys and press $(printYellow 'd').")"
+
+
 
 function AutoUpgrade() {
   local height
@@ -25,7 +28,7 @@ function AutoUpgrade() {
       height=$($BINARY status --node="tcp://127.0.0.1:$PORT_RPC" 2>&1 | jq -r '.SyncInfo.latest_block_height // .sync_info.latest_block_height')
     fi
 
-    echo -e "Current block height: $(printYellow "$height")"
+    echo -e "Current block height: $(printBlue "$height")"
     sleep 5
   done
 
