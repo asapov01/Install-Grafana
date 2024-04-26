@@ -38,15 +38,16 @@ function AutoUpgrade() {
   printBlue "Your node upgraded to version: $VERSION" && sleep 1
   $BINARY version --long | head
 
-  ### Useful commands
-  echo ""
-  printLine
-  printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
-  echo ""
-  printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
-  echo ""
-  printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
-  printLine
 }
 
 AutoUpgrade
+
+### Useful commands
+sleep 1
+printLine
+printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
+echo ""
+printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
+echo ""
+printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
+printLine
