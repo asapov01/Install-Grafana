@@ -14,7 +14,8 @@ PORT_RPC=$6
 logo
 
 echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1
-echo -e "You are currently in a tmux session."
+echo ""
+echo -e "You are currently in a $(printYellow "tmux session")."
 echo -e "If you want to detach from the Tmux session, use the key combination: $(printYellow "CTRL + b"), then release both keys and press $(printYellow 'd'). If that doesn't work, simply $(printYellow 'reconnect') to the server."
 echo -e "To check for an active tmux session after reconnection, you can use the command: $(printYellow 'tmux ls')."
 echo -e "To attach to an existing tmux session, use the command: $(printYellow 'tmux attach-session -t session_name')."
