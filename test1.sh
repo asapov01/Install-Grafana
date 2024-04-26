@@ -14,7 +14,8 @@ PORT_RPC=$6
 logo
 
 echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1
-echo -e "\nIf you want to detach from the Tmux session, use the key combination: $(printYellow "CTRL + b"), then release both keys and press $(printYellow 'd')."
+echo -e "\n If you want to detach from the Tmux session, use the key combination: $(printYellow "CTRL + b"), then release both keys and press $(printYellow 'd'). If that doesn't work, simply $(printYellow 'reconnect') to the server."
+echo -e "\n To check for an active tmux session after reconnection, you can use the command: $(printYellow 'tmux ls')."
 echo ""
 
 function AutoUpgrade() {
