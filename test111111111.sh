@@ -13,7 +13,7 @@ PORT_RPC=$6
 
 logo
 
-echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
+echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1
 
 function AutoUpgrade() {
   local height
@@ -26,7 +26,7 @@ function AutoUpgrade() {
     fi
 
     echo -e "Current block height: $(printYellow "$height")"
-    sleep 1
+    sleep 5
   done
 
   bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/${CHAIN,,}/upgrade/${VERSION}.sh)
