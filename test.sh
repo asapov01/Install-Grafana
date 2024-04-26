@@ -13,7 +13,7 @@ PORT_RPC=$6
 
 logo
 
-echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1
+echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
 
 function AutoUpgrade() {
   local height
