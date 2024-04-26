@@ -13,10 +13,9 @@ PORT_RPC=$6
 
 logo
 
-echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printAddition "$BLOCK")" && sleep 1
-echo -e "\n$(printBlue "If you want to detach from the Tmux session, use the key combination: $(printYellow CTRL + b), then release both keys and press $(printYellow 'd').")"
-
-
+echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1
+echo -e "\nIf you want to detach from the Tmux session, use the key combination: $(printYellow "CTRL + b"), then release both keys and press $(printYellow 'd')."
+echo ""
 
 function AutoUpgrade() {
   local height
